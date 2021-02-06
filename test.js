@@ -1,14 +1,11 @@
-const prespective  = require('./api/perspective');
+// const prespective  = require('./api/perspective');
 
-prespective().then(data => console.log(data));
-// const data = async () => { 
-//     await console.log(google(), "1");
-// }
+// prespective().then(data => console.log(data));
+// // const data = async () => { 
+// //     await console.log(google(), "1");
 
-//data();
+//data()
 
-
-function test(){
-    static var num = 0;
-    num++;
-  }
+const t = 2;
+t =4;
+console.log(t);
