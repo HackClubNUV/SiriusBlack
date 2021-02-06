@@ -1,0 +1,13 @@
+[
+    {
+        "SpellName": "",
+        "Power": "",
+        "Description": "",
+        "Speed": ["fast", "slow"],
+        "ifdefence": false,
+        "ifattack": "true"
+    },
+    {
+
+    }
+]
