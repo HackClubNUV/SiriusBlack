@@ -1,16 +1,15 @@
-const {google} = require('googleapis');
+'use-strict'
+const { google } = require('googleapis');
 require('dotenv').config();
 
 API_KEY = process.env.GOOGLEAPIKEY;
 //console.log(process.env.GOOGLEAPIKEY);
+
 DISCOVERY_URL =
     'https://commentanalyzer.googleapis.com/$discovery/rest?version=v1alpha1';
 
-
-
-const xyz = () => {
-  google.discoverAPI(DISCOVERY_URL)
-    .then(client => {
+    module.exports  = async () => {
+      const client = await google.discoverAPI(DISCOVERY_URL);
       const analyzeRequest = {
         comment: {
           text: 'Fuck you',
@@ -22,33 +21,15 @@ const xyz = () => {
           SPAM: {}
         },
       };
+      const response = await client.comments.analyze( {
+        key: API_KEY,
+        resource: analyzeRequest,
+      });
+      let data = response.data.attributeScores;
+      return Object.values(data).map(level => level.summaryScore.value);
+}
 
-      client.comments.analyze(
-          {
-            key: API_KEY,
-            resource: analyzeRequest,
-          },
-          (err, response) => {
-            if (err) throw err;
-            let data = response.data.attributeScores;
-            let { PROFANITY, TOXICITY, FLIRTATION, SPAM} = data;
-            const p = PROFANITY.summaryScore.value;
-            const t = TOXICITY.summaryScore.value;
-            const f = FLIRTATION.summaryScore.value;
-            const s = SPAM.summaryScore.value;
-            console.log(p, f, t, s);
-            return [p, f, t, s]
-          });
-    })
-    .catch(err => {
-      throw err;
-    });
-  }
-
-  async function fun(){
-      let dataarray = [];
-      dataarray = await xyz();
-      console.log(dataarray, "1");
-  }
-  fun();
-module.exports = google;
+function test(){
+  static let num = 0;
+  num++;
+}
