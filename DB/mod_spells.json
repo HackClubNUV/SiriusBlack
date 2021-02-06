@@ -1,0 +1,38 @@
+[
+    {
+        "SpellName": "Stupefy",
+        "Power": "10",
+        "Damage": "100",
+        "Description": "Warns A User Or Invokes Channel Access Temporarily",
+        "Speed": ["fast"],
+        "ifdefence": false,
+        "ifattack": "true"
+    },
+    {
+        "SpellName": "Crucio",
+        "Power": "40",
+        "Damage": "400",
+        "Description": "Trolls A User Mercilessly",
+        "Speed": ["fast"],
+        "ifdefence": false,
+        "ifattack": "true"
+    },
+    {
+        "SpellName": "Sectumsempra",
+        "Power": "60",
+        "Damage": "600",
+        "Description": "Kick Out A User",
+        "Speed": ["fast"],
+        "ifdefence": false,
+        "ifattack": "true"
+    },
+    {
+        "SpellName": "Avada Kadavra",
+        "Power": "100",
+        "Damage": "1000",
+        "Description": "Ban A User",
+        "Speed": ["fast"],
+        "ifdefence": false,
+        "ifattack": "true"
+    }
+]
