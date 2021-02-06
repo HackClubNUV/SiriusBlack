@@ -8,17 +8,17 @@ API_KEY = process.env.GOOGLEAPIKEY;
 DISCOVERY_URL =
     'https://commentanalyzer.googleapis.com/$discovery/rest?version=v1alpha1';
 
-    module.exports  = async () => {
+    module.exports  = async (comment) => {
       const client = await google.discoverAPI(DISCOVERY_URL);
       const analyzeRequest = {
         comment: {
-          text: 'Fuck you',
+          text: comment,
         },
         requestedAttributes: {
-          PROFANITY: {},
+          // PROFANITY: {},
           TOXICITY: {},
-          FLIRTATION: {},
-          SPAM: {}
+          // FLIRTATION: {},
+          // SPAM: {}
         },
       };
       const response = await client.comments.analyze( {
@@ -26,10 +26,7 @@ DISCOVERY_URL =
         resource: analyzeRequest,
       });
       let data = response.data.attributeScores;
+      let a;
       return Object.values(data).map(level => level.summaryScore.value);
 }
 
-function test(){
-  static let num = 0;
-  num++;
-}

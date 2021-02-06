@@ -7,6 +7,7 @@ const spells = require('./commands/spells');
 
 // Commands
 const spell = require('./commands/spells');
+const prespective  = require('../api/perspective');
 
 
 const client = new Client({
@@ -37,6 +38,30 @@ client.on('ready', () => {
 
 client.on('message', async (message) => {
     if(message.author.bot === true) return;
+    const data_ = [];
+    prespective(message.content).then(data => {
+        // const p = data[0];
+        const t = data[0];
+        // const f = data[2];
+        // const s = data[3];
+         if(Number(t)>Number(0.89)){
+            console.log(t);
+            message.delete({time: 2000})
+                .then(message => {
+                    message.channel.send(`${message.id} from ${message.author} was deleted because it was against COC!`)
+                });
+         }
+            // console.log(p, t, f, s);
+    })
+    .catch(error => {
+        console.log(`ERROR: ${error}`);
+    });
+    // if(data[1]>Number(0.89))
+    //     message.delete();
+})
+
+client.on('message', async (message) => {
+    if(message.author.bot === true) return;
     if(message.content.startsWith(PREFIX)){
         const [CMD_NAME, ...args] = message.content // = hp!spells sectumsempra @nimit
         .trim().
@@ -53,6 +78,11 @@ client.on('message', async (message) => {
             // gamble @krish
             // embeds // xp ++ // leaderboard @krish
             // toxicity [perspective api] 89 with spells @karandev
+            case "tellmep": {
+                console.log(args);
+                //prespective().then(data => console.log(data));s
+            }
+            break;
 
             case "dual" : {
                 console.log(message.author.id);
@@ -77,7 +107,6 @@ client.on('message', async (message) => {
                         
                     })
                     .catch(console.error);
-
             } 
             
             break;
