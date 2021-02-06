@@ -1,7 +1,8 @@
-const { data_ } = require('./api/perspective');
+const { google } = require('./api/perspective');
 
-const res_ = async () => {
-    const res__ = await data_;
-    console.log(res_);
-} 
+google();
+// const data = async () => { 
+//     await console.log(google(), "1");
+// }
 
+//data();
