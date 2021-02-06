@@ -4,7 +4,7 @@
         "Power": "10",
         "Damage": "100",
         "Description": "Warns A User Or Invokes Channel Access Temporarily",
-        "Speed": ["fast"],
+        "Speed": ["Fast"],
         "ifdefence": false,
         "ifattack": "true"
     },
@@ -13,7 +13,7 @@
         "Power": "40",
         "Damage": "400",
         "Description": "Trolls A User Mercilessly",
-        "Speed": ["fast"],
+        "Speed": ["Fast"],
         "ifdefence": false,
         "ifattack": "true"
     },
@@ -22,7 +22,7 @@
         "Power": "60",
         "Damage": "600",
         "Description": "Kick Out A User",
-        "Speed": ["fast"],
+        "Speed": ["Fast"],
         "ifdefence": false,
         "ifattack": "true"
     },
@@ -31,8 +31,35 @@
         "Power": "100",
         "Damage": "1000",
         "Description": "Ban A User",
-        "Speed": ["fast"],
+        "Speed": ["Fast"],
         "ifdefence": false,
         "ifattack": "true"
+    },
+    {
+        "SpellName": "Obliviate",
+        "Power": "50",
+        "Damage": "0",
+        "Description": "Deletes Messages From A Channel",
+        "Speed": ["Fast"],
+        "ifdefence": "false",
+        "ifattack": "true"
+    },
+    {
+        "SpellName": "Alohamora",
+        "Power": "0",
+        "Damage": "0",
+        "Description": "Unlocks Channels For The Mentioned User",
+        "Speed": ["Fast"],
+        "ifdefence": "false",
+        "ifattack": "false"
+    },
+    {
+        "SpellName": "Aberto",
+        "Power": "0",
+        "Damage": "0",
+        "Description": "To Assign Roles To Users",
+        "Speed": ["Fast"],
+        "ifdefence": "false",
+        "ifattack": "false"
     }
 ]
