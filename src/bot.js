@@ -77,7 +77,11 @@ client.on('message', async (message) => {
                         
                     })
                     .catch(console.error);
-
+                    //spell list - veer
+                    //individual spells - krish
+                    //mod spells - karandev
+                    //duel spells - veer
+                    
             } 
             
             break;
@@ -88,4 +92,4 @@ client.on('message', async (message) => {
 
 
 
-client.login(process.env.DJSTOKEN);
+client.login('ODA3MzgzNDg0OTY4NTk5NjE0.YB3Mdw.fCRfc51o1FCAsDkmMEXkADGP4Uc');
