@@ -38,30 +38,30 @@ client.on('ready', () => {
 })
 
 // This thing is working DTTB
-// client.on('message', async (message) => {
-//     if(message.content.startsWith(PREFIX)) return;
-//     if(message.author.bot === true) return;
-//     const data_ = [];
-//     prespective(message.content).then(data => {
-//         // const p = data[0];
-//         const t = data[0];
-//         // const f = data[2];
-//         // const s = data[3];
-//          if(Number(t)>Number(0.89)){
-//             console.log(t);
-//             message.delete({time: 2000})
-//                 .then(message => {
-//                     message.channel.send(`${message.id} from ${message.author} was deleted because it was against COC!`)
-//                 });
-//          }
-//             // console.log(p, t, f, s);
-//     })
-//     .catch(error => {
-//         console.log(`ERROR: ${error}`);
-//     });
-//     // if(data[1]>Number(0.89))
-//     //     message.delete();
-// })
+client.on('message', async (message) => {
+    if(message.content.startsWith(PREFIX)) return;
+    if(message.author.bot === true) return;
+    const data_ = [];
+    prespective(message.content).then(data => {
+        // const p = data[0];
+        const t = data[0];
+        // const f = data[2];
+        // const s = data[3];
+         if(Number(t)>Number(0.89)){
+            console.log(t);
+            message.delete({time: 2000})
+                .then(message => {
+                    message.channel.send(`${message.id} from ${message.author} was deleted because it was against COC!`)
+                });
+         }
+            // console.log(p, t, f, s);
+    })
+    .catch(error => {
+        console.log(`ERROR: ${error}`);
+    });
+    // if(data[1]>Number(0.89))
+    //     message.delete();
+})
 
 client.on('message', async (message) => {
     if(message.author.bot === true) return;
