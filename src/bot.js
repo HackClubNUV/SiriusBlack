@@ -6,10 +6,11 @@ const { Client } = require('discord.js');
 const spells = require('./commands/spells');
 
 // Commands
-const spell = require('./commands/spells')
+const spell = require('./commands/spells');
+
 
 const client = new Client({
-    //partials: ['MESSAGE', 'REACTION']
+    partials: ['MESSAGE', 'REACTION']
 });
 
 const PREFIX = "hp!";
@@ -43,9 +44,42 @@ client.on('message', async (message) => {
         .split(/\s+/);
         
         switch(CMD_NAME){
-            case "spell" : {
+            case "spells" : {
                 spells();
+                message.reply('you were fucked')
             }
+            // spells @veer
+            // dual @user__ @nimit
+            // gamble @krish
+            // embeds // xp ++ // leaderboard @krish
+            // toxicity [perspective api] 89 with spells @karandev
+
+            case "dual" : {
+                console.log(message.author.id);
+                let p = args[0];
+                p = p.replace('>', '');
+                p = p.replace('<@!', '');
+                let dualists = [message.author, args[0]];
+
+                if(message.author.id === p) {
+                    message.reply('You cannot battle with yourself');
+                    return;
+                }
+                
+                message.channel.send(`Do you except the challenge? ${dualists[1]} react with 👌 to accept`);
+                const filter = (reaction, user) => reaction.emoji.name === '👌' && (user.id === 'p');
+                message.awaitReactions(filter, { time: 15000 })
+                    .then(collected => {
+                        message.channel.send(`Lets play start dual ${message.author} vs ${args[0]}`);
+                        message.channel.send(`${message.author} you chance first.`)
+                        console.log(collected);
+                        console.log(`Collected ${collected.size} reactions`)
+                        
+                    })
+                    .catch(console.error);
+
+            } 
+            
             break;
         }
     }
