@@ -2,18 +2,16 @@
 require('dotenv').config();
 const colors = require('colors');
 const axios = require('axios');
-const { Client, ReactionCollector } = require('discord.js');
-const spells = require('./commands/spells');
+const { Client, ReactionCollector, MessageEmbed } = require('discord.js');
 const obliviate = require('./commands/obliviate');
 
 // calling json files
-// const dualSpells = require('../DB/duel_spells.json');
+ const dualSpells = require('../DB/duel_spells.json');
 // const senddata = require('./commands/dualSpellsEmbed');
 //senddata(dualSpells);
 //console.log(dualSpells);
 
 // Commands
-const spell = require('./commands/spells');
 const prespective  = require('../api/perspective');
 const duel_spells = require('../DB/duel_spells.json');
 
@@ -39,31 +37,25 @@ client.on('ready', () => {
     });
 })
 
-// This thing is working DTTB Perspective
+// Perspective API Toxicity
 client.on('message', async (message) => {
     if(message.content.startsWith(PREFIX)) return;
     if(message.author.bot === true) return;
     const data_ = [];
     prespective(message.content).then(data => {
-        // const p = data[0];
         const t = data[0];
-        // const f = data[2];
-        // const s = data[3];
          if(Number(t)>Number(0.89)){
             console.log(t);
             message.delete({time: 2000})
                 .then(message => {
-                    message.channel.send(`${message.id} from ${message.author} was deleted because it was against COC!`)
+                    message.channel.send(`${message.id} from ${message.author} was Obliviated because it was against TOC of Server! `)
+                    message.channel.send('https://tenor.com/uXN3.gif');
                 });
          }
-            // console.log(p, t, f, s);
     })
     .catch(error => {
         console.log(`ERROR: ${error}`);
     });
-    // if(data[1]>Number(0.89))
-    //     message.delete();
-
 })
 
 client.on('message', async (message) => {
@@ -75,9 +67,24 @@ client.on('message', async (message) => {
         .split(/\s+/);
         
         switch(CMD_NAME){
-            case "spells" : {
-                spells();
-                message.reply('you were fucked')
+            case "hello" : {
+                message.channel.send('https://giphy.com/gifs/sirius-black-TzJxDdJckPQ9q ')
+            }
+            break;
+            case "help": {
+                message.channel.send()                
+            }
+            break;
+            case "spellname" : {
+                let spellnames = [];
+                for(let i=0; i<dualSpells.length; i++){
+                    spellnames[i] = dualSpells[i].SpellName;
+                }
+                console.log(spellnames);
+                const spellsEmbed = new MessageEmbed()
+                    .setTitle('Dual Spells')
+                    .addFields[spellnames];
+                message.channel.send(spellsEmbed);
             }
             break;
             // spells @veer
@@ -91,9 +98,11 @@ client.on('message', async (message) => {
             }
             break;
             case "obliviate" : {
-                console.log('object');
                 message.channel.bulkDelete(args[0])
-                    .then( messages => message.channel.send(`${messages.size} Messages were deleted by the magical spell of Obliviate from ${message.author}!`))
+                    .then( messages => {
+                        message.channel.send(`${messages.size} Messages were deleted by the magical spell of Obliviate from ${message.author}!`);
+                        message.channel.send('https://tenor.com/uXN3.gif');
+                    })
                     .catch(Error => console.log(Error));
             }
             break;
@@ -171,4 +180,4 @@ client.on('message', async (message) => {
 })
 
 
-client.login(process.env.DJSTOKEN2); 
+client.login(process.env.DJSTOKEN); 
