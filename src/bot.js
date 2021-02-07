@@ -77,14 +77,26 @@ client.on('message', async (message) => {
             break;
             case "spellname" : {
                 let spellnames = [];
+                let spelldescription = [];
                 for(let i=0; i<dualSpells.length; i++){
                     spellnames[i] = dualSpells[i].SpellName;
+                    spelldescription[i] = dualSpells[i].Description;
                 }
-                console.log(spellnames);
+
+
+                console.log(spellnames[0], spelldescription[0]);
+                console.log(spellnames.length);
                 const spellsEmbed = new MessageEmbed()
                     .setTitle('Dual Spells')
-                    .addFields[spellnames];
-                message.channel.send(spellsEmbed);
+                    .addField(spellnames[0], spelldescription[0])
+                    .addField(spellnames[1], spelldescription[1])
+                    .addField(spellnames[2], spelldescription[2])
+                    .addField(spellnames[3], spelldescription[3])
+                    .addField(spellnames[4], spelldescription[4])
+                    .addField(spellnames[5], spelldescription[5])
+                    .addField(spellnames[6], spelldescription[6])
+                    .addField(spellnames[7], spelldescription[7])
+                message.channel.send(spellsEmbed);  
             }
             break;
             // spells @veer
@@ -103,7 +115,10 @@ client.on('message', async (message) => {
                         message.channel.send(`${messages.size} Messages were deleted by the magical spell of Obliviate from ${message.author}!`);
                         message.channel.send('https://tenor.com/uXN3.gif');
                     })
-                    .catch(Error => console.log(Error));
+                    .catch(Error => {
+                        console.log(Error);
+                        message.channel.send('Enter number to delete messages')
+                    });
             }
             break;
             case "dual" : {
