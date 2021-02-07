@@ -6,6 +6,7 @@
   <ul>
     <li> NodeJs > 12.XX </li>
     <li> NPM >= 6.0.0</li>
+    <li> Nodemon</li>
   </ul>
 </details>
 
