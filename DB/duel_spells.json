@@ -108,5 +108,16 @@
         "Speed": ["Fast"],
         "ifdefence": "true",
         "ifattack": "false" 
-    }
+    },
+    {
+        "SpellName": "Stupefy",
+        "URL": "https://media.tenor.com/images/76544063e9fe2270ab09f77e01d52e74/tenor.gif",
+        "Power": "1",
+        "Damage": "10",
+        "Healing": "0",
+        "Description": "Warns A User",
+        "Speed": ["Fast"],
+        "ifdefence": "false",
+        "ifattack": "true"
+    },
 ]
