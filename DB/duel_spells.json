@@ -38,5 +38,65 @@
         "Speed": ["Slow"],
         "ifdefence": "true",
         "ifattack": "false"
+    },
+    {
+        "SpellName": "Periculum",
+        "Power": "2",
+        "Damage": "20",
+        "Healing": "30",
+        "Description": "Conjures Flares That Confuse The Enemy",
+        "Speed": ["Fast"],
+        "ifdefence": "true",
+        "ifattack": "false"
+    },
+    {
+        "SpellName": "Petrificus Totalus",
+        "Power": "8",
+        "Damage": "0",
+        "Healing": "30",
+        "Description": "Freezes the enemy and skips their next turn",
+        "Speed": ["Fast"],
+        "ifdefence": "true",
+        "ifattack": "false"
+    },
+    {
+        "SpellName": "Protego",
+        "Power": "10",
+        "Damage": "0",
+        "Healing": "0",
+        "Description": "Creates A Shield That Dampens The Blow Of The Next 2 Attacks",
+        "Speed": ["Fast"],
+        "ifdefence": "true",
+        "ifattack": "false"
+    },
+    {
+        "SpellName": "Rictusempra",
+        "Power":"10",
+        "Damage": "50",
+        "Healing": "0",
+        "Description": "Makes The Enemy Laugh Until They Get Hurt",
+        "Speed": ["Slow"],
+        "ifdefence": "true",
+        "ifattack": "false" 
+    },
+    {
+        "SpellName": "Wingardium Leviosa",
+        "Power": "10",
+        "Damage": "100",
+        "Healing": "0",
+        "Description": "Makes The Enemy Float, & Crashes Them",
+        "Speed": ["Slow"],
+        "ifdefence": "false",
+        "ifattack": "true" 
+    },
+    {
+        "SpellName": "Impedimenta",
+        "Power": "10",
+        "Damage": "0",
+        "Healing": "0",
+        "Description": "Slows The Movement Of Target & Reduces Their Attack Damage By 50% For The Next Two Rounds",
+        "Speed": ["Fast"],
+        "ifdefence": "true",
+        "ifattack": "false" 
     }
 ]

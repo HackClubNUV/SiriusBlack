@@ -4,6 +4,13 @@ const colors = require('colors');
 const axios = require('axios');
 const { Client, ReactionCollector } = require('discord.js');
 const spells = require('./commands/spells');
+const obliviate = require('./commands/obliviate');
+
+// calling json files
+const dualSpells = require('../DB/duel_spells.json');
+const senddata = require('./commands/dualSpellsEmbed');
+senddata(dualSpells);
+//console.log(dualSpells);
 
 // Commands
 const spell = require('./commands/spells');
@@ -27,17 +34,12 @@ client.on('ready', () => {
     const users = client.users.cache.size;
     
     console.log(`Bot is now online and serving in ${servers} Server and ${users} users`);
-
-    //This will display "Playing in <servers> servers!"
-    // client.user.setActivity(`in ${servers} servers and serving ${users} Users`, {
-    //     type: 'PLAYING',
-    // });
     client.user.setActivity(`casting spells!`, {
         type: 'PLAYING'
     });
 })
 
-// This thing is working DTTB
+// This thing is working DTTB Perspective
 client.on('message', async (message) => {
     if(message.content.startsWith(PREFIX)) return;
     if(message.author.bot === true) return;
@@ -61,6 +63,7 @@ client.on('message', async (message) => {
     });
     // if(data[1]>Number(0.89))
     //     message.delete();
+
 })
 
 client.on('message', async (message) => {
@@ -76,17 +79,24 @@ client.on('message', async (message) => {
                 spells();
                 message.reply('you were fucked')
             }
+            break;
             // spells @veer
             // dual @user__ @nimit
             // gamble @krish
             // embeds // xp ++ // leaderboard @krish
             // toxicity [perspective api] 89 with spells @karandev
             case "tellmep": {
-                console.log(args);
+                obliviate();
                 //prespective().then(data => console.log(data));s
             }
             break;
-
+            case "obliviate" : {
+                console.log('object');
+                message.channel.bulkDelete(args[0])
+                    .then( messages => message.channel.send(`${messages.size} Messages were deleted by the magical spell of Obliviate from ${message.author}!`))
+                    .catch(Error => console.log(Error));
+            }
+            break;
             case "dual" : {
                 console.log(message.author.id);
                 let p = args[0];
@@ -110,9 +120,7 @@ client.on('message', async (message) => {
                         let user1 = {"health": 100, "id": dualists[0]};
                         let user2 = {"health": 100, "id": dualists[1]};
                         console.log(message.author.id, p);
-                        client.on('message', (message_fight) => {
-                            if(user1["health"] <= 0) return message_fight.channel.send(`${message.authour} lost the Dual!`);
-                            if(user2["health"] <= 0) return message_fight.channel.send(`${args[0]} lost the Dual!`);
+                        client.on('message', function toBeClosed (message_fight) {
                             if(message_fight.author.id === message.author.id || message_fight.author.id === p){
                                 const [CMD_NAME, ...args_] = message_fight.content // = hp!spells sectumsempra @nimit
                                     .trim().
@@ -122,6 +130,7 @@ client.on('message', async (message) => {
                                         for(let i=0; i<Number(duel_spells.length); i++){
                                             if(duel_spells[i].SpellName === args_[0]){
                                                 user2['health'] = Number(user2['health']) - Number(duel_spells[i].Damage);
+                                                message_fight.channel.send(`user2: ${user2['health']}`);
                                                 console.log(`user2: ${user2['health']}`);
                                             }
                                         }
@@ -135,7 +144,18 @@ client.on('message', async (message) => {
                                     }
                                 
                                 console.log(args_, i);
+                                if(user1["health"] <= 0) {
+                                     message_fight.channel.send(`${message.author} lost the Dual!`);
+                                     client.removeListener('message', toBeClosed);
+                                     return;
+                                }
+                                if(user2["health"] <= 0) { 
+                                     client.removeListener('message', toBeClosed);
+                                     message_fight.channel.send(`${args[0]} lost the Dual!`);
+                                    return;
+                                }
                                 i = i+1;
+
                             }
                         })
                     })
