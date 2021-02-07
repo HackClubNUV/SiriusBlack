@@ -6,6 +6,12 @@ const { Client, ReactionCollector } = require('discord.js');
 const spells = require('./commands/spells');
 const obliviate = require('./commands/obliviate');
 
+// calling json files
+const dualSpells = require('../DB/duel_spells.json');
+const senddata = require('./commands/dualSpellsEmbed');
+senddata(dualSpells);
+//console.log(dualSpells);
+
 // Commands
 const spell = require('./commands/spells');
 const prespective  = require('../api/perspective');
