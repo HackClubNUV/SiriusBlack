@@ -1,4 +1,5 @@
 ## Description
+SiriusBlack is a discord bot that provides toxicity monitoring, and also provides fun Harry Potter themed mini games and moderation commands
 
 <details>
 <summary>Requirements</summary>
