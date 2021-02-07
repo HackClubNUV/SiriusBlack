@@ -72,7 +72,16 @@ client.on('message', async (message) => {
             }
             break;
             case "help": {
-                message.channel.send()                
+                const helpEmbedd = new MessageEmbed()
+                .setTitle('List of Commands' )
+                .addField('hello','Say hi to serious black' )
+                .addField('spellname','Gets the list of all spells' )
+                .addField('dual <@user>','Challenge someone for a dual' )
+                .addField('obliviate <number>','Deletes last <number> messages from that channel' )
+                .addField('Crucio <@user>','Kick a user' )
+                .addField('Avadacadavra <@user>','Bans a user' )
+                .addField('Stupefy <@user>','Warns the user' );
+                message.channel.send(helpEmbedd);                
             }
             break;
             case "spellname" : {
@@ -163,6 +172,7 @@ client.on('message', async (message) => {
                                             if(duel_spells[i].SpellName === args_[0]){
                                                 user1['health'] = Number(user1['health']) - Number(duel_spells[i].Damage);
                                                 console.log(`user1: ${user1['health']}`);
+                                               
                                             }
                                         }
                                     }
