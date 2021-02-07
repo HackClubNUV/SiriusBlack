@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/bot.js",
+    "dev2": "nodemon src/bot2.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

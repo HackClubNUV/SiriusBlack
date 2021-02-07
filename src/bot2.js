@@ -119,7 +119,7 @@ client.on('ready', () => {
 //     }
 // });*/
 
-client.on('message' , async function fun (message) {
+/*client.on('message' , async function fun (message) {
   if (message.author.bot)
         {return;}
     else if(message.content.startsWith(PREFIX))
@@ -180,8 +180,74 @@ client.on('message' , async function fun (message) {
             };
         }
     };
-});
+});*/
 
 
+ client.on('message' , async (message) => {
+    console.log(message.content);
+    if (message.author.bot) return;
+    if(message.content.startsWith(PREFIX))
+      {
+        const [EXP_NAME, ...args] = message.content
+            .trim().
+            substring(PREFIX.length)
+            .split(/\s+/);
+        if(!message.member.hasPermission('KICK_MEMBERS')) return message.reply('You do not have permissions to use that command!');
+        if(args.length === 0) return message.reply('Please provide an user. ');
+        
+        let Z = args[0];
+        Z = Z.replace('>', '');
+        Z = Z.replace('<@!', ''); 
+        
+        const user = message.mentions.users.first();
+        console.log(user);
+        if(!user) {
+            message.channel.send('That member was not found!');
+            return;
+        }
+        const member = message.guild.member(user);
+        console.log(member);
+        switch(EXP_NAME){
+            case "Crucio":
+            {
+                if(member){
+                    member.kick()
+                    .then((member) => {
+                        message.channel.send(`Kicked the user ${member}`)
+                    })
+                    .catch((err) => {
+                        message.channel.send('I cannot kick that user :(');
+                    });    
+                }
+            break;
+            }          
+            case "Avadacadavra":    
+            {
+                if(member){
+                    member.ban()
+                    .then((member) => {
+                        message.channel.send(`Banned the user ${member2}`);
+                    })
+                    .catch((err) => {
+                        message.channel.send('I cannot Ban that user ');
+                    });    
+                }
+            }   
+            break;
+            case "Stupefy":   
+            {
+                console.log('here');
 
-client.login('ODAyNDYxNDQ0Mjg0NDgxNTM2.YAvkdQ.UY9kWcEvLdDgsvXOd2Mb4EiFbT0');
+                if(member){
+                    message.channel.send(`${member} you have ben warned`);
+                } 
+            }
+        break;
+        
+    };
+    
+    };
+}
+);
+
+client.login(process.env.DJSTOKEN3);
