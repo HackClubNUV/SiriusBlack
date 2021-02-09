@@ -38,25 +38,25 @@ client.on('ready', () => {
 })
 
 // Perspective API Toxicity
-// client.on('message', async (message) => {
-//     if(message.content.startsWith(PREFIX)) return;
-//     if(message.author.bot === true) return;
-//     const data_ = [];
-//     prespective(message.content).then(data => {
-//         const t = data[0];
-//          if(Number(t)>Number(0.89)){
-//             console.log(t);
-//             message.delete({time: 2000})
-//                 .then(message => {
-//                     message.channel.send(`${message.id} from ${message.author} was Obliviated because it was against TOC of Server! `)
-//                     message.channel.send('https://tenor.com/uXN3.gif');
-//                 });
-//          }
-//     })
-//     .catch(error => {
-//         console.log(`ERROR: ${error}`);
-//     });
-// })
+client.on('message', async (message) => {
+    if(message.content.startsWith(PREFIX)) return;
+    if(message.author.bot === true) return;
+    const data_ = [];
+    prespective(message.content).then(data => {
+        const t = data[0];
+         if(Number(t)>Number(0.89)){
+            console.log(t);
+            message.delete({time: 2000})
+                .then(message => {
+                    message.channel.send(`${message.id} from ${message.author} was Obliviated because it was against TOC of Server! `)
+                    message.channel.send('https://tenor.com/uXN3.gif');
+                });
+         }
+    })
+    .catch(error => {
+        console.log(`ERROR: ${error}`);
+    });
+})
 
 client.on('message', async (message) => {
     if(message.author.bot === true) return;
@@ -157,6 +157,14 @@ client.on('message', async (message) => {
                         let user2 = {"health": 100, "id": dualists[1]};
                         console.log(message.author.id, p);
                         client.on('message', function toBeClosed (message_fight) {
+                            if(i%2 != 0 && message_fight.author.id === message.author.id){
+                                message_fight.channel.send('its not your chance');
+                                return;
+                            }
+                            if(i%2 == 0 && message_fight.author.id === p) {
+                                message_fight.channel.send('its not your chance');
+                                return;
+                            }
                             if(message_fight.author.id === message.author.id || message_fight.author.id === p){
                                 const [CMD_NAME, ...args_] = message_fight.content // = hp!spells sectumsempra @nimit
                                     .trim().
@@ -168,7 +176,7 @@ client.on('message', async (message) => {
                                                 user2['health'] = Number(user2['health']) - Number(duel_spells[i].Damage);
                                                 message_fight.channel.send(`${args[0]}: ${user2['health']}`);
                                                 message_fight.channel.send(`${duel_spells[i].URL}`);
-                                                console.log(`user2: ${user2['health']}`);
+                                                console.log(`${p}: ${user2['health']}`);
                                             }
                                         }
                                     }else{
@@ -176,6 +184,7 @@ client.on('message', async (message) => {
                                             if(duel_spells[i].SpellName === args_[0]){
                                                 user1['health'] = Number(user1['health']) - Number(duel_spells[i].Damage);
                                                 console.log(`${message.author}: ${user1['health']}`);
+                                                message_fight.channel.send(`${message.author}: ${user1['health']}`);
                                                 message_fight.channel.send(`${duel_spells[i].URL}`);
                                             }
                                         }
@@ -207,73 +216,75 @@ client.on('message', async (message) => {
     }
 })
 
-client.on('message' , async (message) => {
-  if(!message.member.permissions.has('MANAGE_GUILD')) return;
+// client.on('message' , async (message) => {
+//   if(!message.member.permissions.has('MANAGE_GUILD')) return;
     
-    if (message.author.bot) return;
-    if(message.content.startsWith(PREFIX))
-      {
-        const [EXP_NAME, ...args] = message.content
-            .trim().
-            substring(PREFIX.length)
-            .split(/\s+/);
-        let mod_commds = ["Crucio", "Avadacadavra", "Stupefy"];
-        if(!(mod_commds.find(args[0]))) console.log('not that command');
-        if(!message.member.hasPermission('KICK_MEMBERS')) return message.reply('You do not have permissions to use that command!');
-        if(args.length === 0) return message.reply('Please provide an user. ');
+//     if (message.author.bot) return;
+//     if(message.content.startsWith(PREFIX))
+//       {
+//         const [EXP_NAME, ...args] = message.content
+//             .trim().
+//             substring(PREFIX.length)
+//             .split(/\s+/);
+//         let mod_commds = ["Crucio", "Avadacadavra", "Stupefy"];
+//         if(!((mod_commds[0] === args[0]) || (mod_commds[0] === args[0]) || (mod_commds[0] === args[0]))) {
+//             return;
+//         }
+//             if(!message.member.hasPermission('KICK_MEMBERS')) return message.reply('You do not have permissions to use that command!');
+//         if(args.length === 0) return message.reply('Please provide an user. ');
         
-        let Z = args[0];
-        Z = Z.replace('>', '');
-        Z = Z.replace('<@!', ''); 
+//         let Z = args[0];
+//         Z = Z.replace('>', '');
+//         Z = Z.replace('<@!', ''); 
         
-        const user = message.mentions.users.first();
-        if(!user) {
-            message.channel.send('That member was not found!');
-            return;
-        }
-        const member = message.guild.member(user);
-        switch(EXP_NAME){
-            case "Crucio":
-            {
-                if(member){
-                    member.kick()
-                    .then((member) => {
-                        message.channel.send(`Kicked the user ${member}`)
-                    })
-                    .catch((err) => {
-                        message.channel.send('I cannot kick that user :(');
-                    });    
-                }
-            break;
-            }          
-            case "Avadacadavra":    
-            {
-                if(member){
-                    member.ban()
-                    .then((member) => {
-                        message.channel.send(`Banned the user ${member2}`);
-                    })
-                    .catch((err) => {
-                        message.channel.send('I cannot Ban that user ');
-                    });    
-                }
-            }   
-            break;
-            case "Stupefy":   
-            {
-                console.log('here');
+//         const user = message.mentions.users.first();
+//         if(!user) {
+//             message.channel.send('That member was not found!');
+//             return;
+//         }
+//         const member = message.guild.member(user);
+//         switch(EXP_NAME){
+//             case "Crucio":
+//             {
+//                 if(member){
+//                     member.kick()
+//                     .then((member) => {
+//                         message.channel.send(`Kicked the user ${member}`)
+//                     })
+//                     .catch((err) => {
+//                         message.channel.send('I cannot kick that user :(');
+//                     });    
+//                 }
+//             break;
+//             }          
+//             case "Avadacadavra":    
+//             {
+//                 if(member){
+//                     member.ban()
+//                     .then((member) => {
+//                         message.channel.send(`Banned the user ${member2}`);
+//                     })
+//                     .catch((err) => {
+//                         message.channel.send('I cannot Ban that user ');
+//                     });    
+//                 }
+//             }   
+//             break;
+//             case "Stupefy":   
+//             {
+//                 console.log('here');
 
-                if(member){
-                    message.channel.send(`${member} you have ben warned`);
-                } 
-            }
-        break;
+//                 if(member){
+//                     message.channel.send(`${member} you have ben warned`);
+//                 } 
+//             }
+//         break;
         
-    };
+//     };
     
-    };
-}
-);
+//     };
+// }
+// );
 
 
 client.login(process.env.DJSTOKEN); 
